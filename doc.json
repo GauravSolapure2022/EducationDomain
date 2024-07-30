@@ -1,0 +1,167 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Api Documentation",
+        "version": "1.0",
+        "title": "Api Documentation",
+        "termsOfService": "urn:tos",
+        "contact": {},
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0"
+        }
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "irctc-rest-controller",
+            "description": "Irctc Rest Controller"
+        }
+    ],
+    "paths": {
+        "/ticket": {
+            "post": {
+                "tags": [
+                    "irctc-rest-controller"
+                ],
+                "summary": "bookTicket",
+                "operationId": "bookTicketUsingPOST",
+                "consumes": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "passanger",
+                        "description": "passanger",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Passanger"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/ticket/{ticketId}": {
+            "get": {
+                "tags": [
+                    "irctc-rest-controller"
+                ],
+                "summary": "getTicket",
+                "operationId": "getTicketUsingGET",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "ticketId",
+                        "in": "path",
+                        "description": "ticketId",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ticket"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Passanger": {
+            "type": "object",
+            "properties": {
+                "doj": {
+                    "type": "string"
+                },
+                "fName": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "lName": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "string"
+                },
+                "trainNum": {
+                    "type": "string"
+                }
+            },
+            "title": "Passanger"
+        },
+        "Ticket": {
+            "type": "object",
+            "properties": {
+                "from": {
+                    "type": "string"
+                },
+                "ticketId": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "ticketStatus": {
+                    "type": "string"
+                },
+                "tktCost": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "string"
+                },
+                "trainNum": {
+                    "type": "string"
+                }
+            },
+            "title": "Ticket",
+            "xml": {
+                "attribute": false,
+                "wrapped": false
+            }
+        }
+    }
+}
